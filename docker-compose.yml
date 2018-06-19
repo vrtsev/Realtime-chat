@@ -1,0 +1,58 @@
+version: '3.4'
+
+x-shared: &shared
+  env_file:    .env
+  working_dir: /web
+  volumes:
+    - "bundle-cache:/usr/local/bundle:cached"
+    - '.:/web:cached'
+  stdin_open: true
+  tty:        true
+
+services:
+  web:
+    << : *shared
+    build: .
+    command:
+      - /bin/sh
+      - -c
+      - |
+        rm -f /web/tmp/pids/server.pid
+        cd /web
+        bundle exec rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+      - frontend
+
+  db:
+    image:   postgres:latest
+    restart: always
+    command: postgres -c fsync=off
+    networks:
+      - backend
+    volumes:
+      - '.:/web:cached'
+      - 'pg-data:/var/lib/postgresql/data:cached'
+    ports:
+      - "5435:5432"
+
+  webpack:
+    << : *shared
+    # Change project prefix name
+    image: 'project_web:latest'
+    command:
+      - ./bin/webpack-dev-server
+    ports:
+      - '3035:3035'
+    networks:
+      - frontend
+
+volumes:
+  bundle-cache: null
+  pg-data:      null
+
+networks:
+  frontend:
+  backend:
