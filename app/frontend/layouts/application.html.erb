@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Eam</title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <body>
+    <div id="app">
+      <Application>
+        <router-view></router-view>
+      </Application>
+    </div>
+  </body>
+</html>
