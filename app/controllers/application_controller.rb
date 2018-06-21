@@ -1,6 +1,15 @@
 class ApplicationController < ActionController::Base
+  include Authentication
+  include JSONResponders
+
   def index
-    # Layout can be found in app/frontend/layouts
     render template: "layouts/application"
+  end
+
+  private
+
+  # Helper for trailblazer operations
+  def get_errors_from(operation)
+    operation['contract.default'].errors.full_messages
   end
 end
