@@ -11,6 +11,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'webpacker'
+gem 'railties'
+gem 'jwt'
+
+# Trailblazer
+gem 'trailblazer', '~> 2.0'
+gem 'trailblazer-rails'
 
 group :development do
   gem 'pry'
