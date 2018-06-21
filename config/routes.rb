@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   namespace :api do
   end
+
+  get "*path", to: "application#index", format: false
 end
