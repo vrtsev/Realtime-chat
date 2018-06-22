@@ -18,7 +18,6 @@ import VueRouter           from 'vue-router'
 import routes              from 'application/routes'
 import Store               from 'application/store'
 import axios               from "axios";
-import ActionCable         from 'actioncable';
 
 // Mixins
 // import FormMixin           from 'application/mixins/form_mixin.js'
@@ -34,10 +33,6 @@ axios.defaults.headers.common['Accept']           = 'application/json'
 
 // Initialize Vue instance here
 document.addEventListener('DOMContentLoaded', () => {
-  // Establish WebSocket connection
-  const cable = ActionCable.createConsumer(`/cable?token=${localStorage.user_token}`);
-  window.cable = cable
-
   // Define global mixins here
   // Vue.mixin(FormMixin)
 

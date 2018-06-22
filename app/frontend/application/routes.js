@@ -14,11 +14,15 @@
 
 import UsersLogin  from 'application/components/users/Login.vue'
 import UsersSignUp from 'application/components/users/SignUp.vue'
+import ChatroomsIndex from 'application/components/chatrooms/Index.vue'
+import ChatroomsShow from 'application/components/chatrooms/Show.vue'
 
 export default [
-  { name: 'root',          path: '/',              template: '<h1>haha</h1>'},
-  { name: 'users_login',   path: '/users/login',   component: UsersLogin },
-  { name: 'users_sign_up', path: '/users/sign_up', component: UsersSignUp },
+  { name: 'root',            path: '/',              redirect: '/chatrooms' },
+  { name: 'users_login',     path: '/users/login',   component: UsersLogin },
+  { name: 'users_sign_up',   path: '/users/sign_up', component: UsersSignUp },
+  { name: 'chatrooms_index', path: '/chatrooms',     component: ChatroomsIndex },
+  { name: 'chatrooms_show',  path: '/chatrooms/:id', component: ChatroomsShow },
 ]
 
 // Development info
