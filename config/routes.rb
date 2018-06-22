@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :sessions, only: :create do
       get :current, on: :collection
     end
+
+    resources :chatrooms, only: [:index, :show, :create] do
+      resources :messages, only: [:index, :create]
+    end
   end
 
   get "*path", to: "application#index", format: false

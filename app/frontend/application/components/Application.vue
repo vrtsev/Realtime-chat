@@ -8,6 +8,7 @@
 
 <script>
 import Navbar from 'application/components/shared/Navbar.vue'
+import axios from 'axios'
 
 export default {
   components: { navbar: Navbar },
