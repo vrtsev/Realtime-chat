@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module Skeleton
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.action_cable.url = ENV['WEB_SOCKET_URL'] + '/cable' 
     config.load_defaults 5.2
     config.paths['app/views'].unshift("app/frontend")
     config.autoload_paths += ['lib/']
