@@ -1,6 +1,8 @@
 module Authentication
   extend ActiveSupport::Concern
 
+  TOKEN_PATTERN = /Bearer (.*)$/
+
   private
 
   def authenticate
@@ -16,7 +18,10 @@ module Authentication
   end
 
   def current_session
-    Session::Current.(auth_header: request.headers['Authorization'])
+    token = request.headers['Authorization']
+    token = token.scan(TOKEN_PATTERN).flatten.last if token.present?
+
+    Session::Current.(token: token)
   end
 
   def check_admin_rights

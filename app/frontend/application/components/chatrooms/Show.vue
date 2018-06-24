@@ -14,7 +14,7 @@
     <h2>Messages: </h2>
     <br>
 
-    <div v-for="message in message.allMessages" :key="message.content" class="alert" :class="isCurrentUser(message.user.name) ? 'alert-primary my-message' : 'alert-warning'" role="alert">
+    <div v-for="(message, index) in message.allMessages" :key="index" class="alert" :class="defineMessageClass(message.type, message.user.name)" role="alert">
       <b>{{ message.user.name }}:</b> {{ message.content }}
     </div>
   </div>
@@ -33,8 +33,10 @@ export default {
     sendMessage() {
       store.dispatch('message/create', router.currentRoute.params.id)
     },
-    isCurrentUser(name) {
-      return store.state.user.data.name == name
+    defineMessageClass(type, name) {
+      if (type == 'notification') return "notification"
+
+      return store.state.user.data.name == name ? 'alert-primary my-message' : 'alert-warning'
     }
   }
 }
@@ -47,6 +49,11 @@ export default {
 
   .alert:not(.my-message) {
     margin-right: 150px;
+  }
+
+  .alert.notification {
+    margin: 0 150px;
+    text-align: center;
   }
 
 </style>
