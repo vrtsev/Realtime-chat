@@ -22,12 +22,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import ChatroomChannel from 'application/channels/chatroom_channel.js'
 
 export default {
   computed: mapState(['chatroom', 'message']),
   mounted() {
     store.dispatch('chatroom/show', router.currentRoute.params.id)
     store.dispatch('message/index', router.currentRoute.params.id)
+    ChatroomChannel(router.currentRoute.params.id)
   },
   methods: {
     sendMessage() {
