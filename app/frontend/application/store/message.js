@@ -25,9 +25,9 @@ export default {
     },
     create(context, chatroom_id) {
       return axios.post('/api/chatrooms/' + chatroom_id + '/messages', { message: context.state.form })
-      .then((response) => {
-        context.commit('addMessage', response.data.response.message)
-      })
+      // .then((response) => {
+        // context.commit('addMessage', response.data.response.message)
+      // })
       .catch((error) => {
         console.log('Can not create message')
       })

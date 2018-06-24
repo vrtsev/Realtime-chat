@@ -14,6 +14,7 @@ class Api::MessagesController < ApiController
     message.chatroom_id = chatroom.id
 
     if message.save
+      ActionCable.server.broadcast("chatroom_#{params[:chatroom_id]}", message.as_json(include: :user))
       render_ok_json(response: { message: message.as_json(include: :user) })
     else
       render_error_json(errors: ["Some error"])
