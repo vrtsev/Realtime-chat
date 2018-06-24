@@ -55,7 +55,7 @@ export default {
       authToken.restore()
       return axios.get('/api/sessions/current', { session: context.state.form })
       .then((response) => {
-        context.commit('authorize',           response.data.response.token)
+        context.commit('authorize',           response.data.response.user_token)
         context.commit('user/assignUserData', response.data.response.user, { root: true })
         authToken.save(response.data.response.token)
       })

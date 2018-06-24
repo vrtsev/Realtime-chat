@@ -4,12 +4,6 @@ export default {
   namespaced: true,
   state: {
     allMessages: [],
-    // data: {
-    //   content: '',
-    //   user: {
-    //     name: ''
-    //   }
-    // },
     form: {
       content: '',
     }

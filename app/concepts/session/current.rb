@@ -2,7 +2,6 @@ class Session::Current < Trailblazer::Operation
   include OperationHelper
 
   PAYLOAD_USER_KEY = 'user'
-  TOKEN_PATTERN    = /Bearer (.*)$/
 
   step :get_header_token
   step :decode_token
@@ -10,17 +9,12 @@ class Session::Current < Trailblazer::Operation
   step :find_user
 
   def get_header_token(options, params:, **)
-    if params[:auth_header].present?
-      options[:token] = params[:auth_header].scan(TOKEN_PATTERN).flatten.last
-    elsif params[:token].present?
-      options[:token] = params[:token]
-    else
-      error(options, 'Authorization header not found')
-    end
+    return error(options, 'Authorization header not found') unless params[:token].present?
+    options[:token] = params[:token]
   end
 
   def decode_token(options, params:, **)
-    options[:payload] = Auth.decode(options[:token])
+    options[:payload] = Auth.decode(params[:token])
     return options[:payload] unless options[:payload].nil?
 
     error(options, 'Empty token payload (Check token exp. date)')
