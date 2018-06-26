@@ -25,7 +25,7 @@ class Api::SessionsController < ApiController
   def token_payload_for(user)
     {
       user:  user.id,
-      admin: user.admin
+      admin: user.admin,
       iss:   'Realtime Chat',
       exp:   Time.now.to_i + 4 * 3600
     }
