@@ -801,6 +801,18 @@ babylon@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
+baiji-entity@^1.1.0-alpha.4:
+  version "1.1.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/baiji-entity/-/baiji-entity-1.1.0-alpha.4.tgz#02d5007c7bdc81b6b9502b1af2bb401f8ab40c38"
+  dependencies:
+    baiji-normalizer "^1.0.7"
+    debug "^3.1.0"
+    stoc "1.0.1"
+
+baiji-normalizer@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/baiji-normalizer/-/baiji-normalizer-1.0.7.tgz#201f73d903ee15d4b65b7399d603e89003b8ac9b"
+
 balanced-match@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.1.0.tgz#b504bd05869b39259dd0c5efc35d843176dccc4a"
@@ -2714,6 +2726,10 @@ indexof@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
 
+inflected@^1.1.6:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/inflected/-/inflected-1.1.7.tgz#c393df6e28472d0d77b3082ec3aa2091f4bc96f9"
+
 inflight@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
@@ -3107,6 +3123,13 @@ json5@^0.5.0, json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
+jsonapi-serializer@^3.5.6:
+  version "3.5.6"
+  resolved "https://registry.yarnpkg.com/jsonapi-serializer/-/jsonapi-serializer-3.5.6.tgz#4b239ee023dd2096f1be474d2d8243747240d8a3"
+  dependencies:
+    inflected "^1.1.6"
+    lodash "^4.16.3"
+
 jsonfile@^2.1.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
@@ -3257,7 +3280,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.17.5, lodash@~4.17.10:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.16.3, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.17.5, lodash@~4.17.10:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -5381,6 +5404,10 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
+stoc@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/stoc/-/stoc-1.0.1.tgz#00a813f8dc0970f61c4bcfda241154a936129362"
+
 stream-browserify@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.1.tgz#66266ee5f9bdb9940a4e4514cafb43bb71e5c9db"
@@ -5892,6 +5919,14 @@ vue@2.5.11:
 vue@^2.1.10, vue@^2.5.16:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
+
+vuex-rails-plugin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vuex-rails-plugin/-/vuex-rails-plugin-1.0.1.tgz#aaad920302f3c239dee5573659e160e3c413a2c7"
+  dependencies:
+    axios "^0.18.0"
+    vue "^2.5.16"
+    vuex "^3.0.1"
 
 vuex@^3.0.1:
   version "3.0.1"

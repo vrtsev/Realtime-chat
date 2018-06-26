@@ -14,21 +14,24 @@
     </div>
 
     <div class="inline">
-
-      <a v-if="auth.authenticated" @click="logout" class="btn btn-outline-success">Logged as {{ user.data.name }}</a>
-      <router-link v-else to="/users/login"   class="btn btn-outline-success">Login</router-link>
+      <a v-if="session.user" @click="destroySession" class="btn btn-outline-success">Logged as {{ session.user.name }}</a>
+      <router-link v-else to="/users/login"   class="btn btn-outline-success">Login</router-link> 
     </div>
   </nav>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import AuthHelper   from 'application/helpers/auth_helper.js'
 
 export default {
-  computed: mapState(['auth', 'user']),
+  computed: mapState('sessions', {
+    session: state => state.current,
+  }),
   methods: {
-    logout() {
-      store.dispatch('auth/logout')
+    destroySession() {
+      store.commit('sessions/DESTROY', this.session)
+      AuthHelper.clearToken()
     }
   }
 }

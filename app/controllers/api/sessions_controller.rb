@@ -3,7 +3,7 @@ class Api::SessionsController < ApiController
 
   def current
     if current_user.present?
-      render_ok_json(response: { user: current_user, token: current_session[:token] })
+      render json: { user: current_user, token: current_session[:token] }
     else
       render_error_json(errors: ["Not logged in"])
     end
@@ -14,7 +14,7 @@ class Api::SessionsController < ApiController
 
     if user.present?
       auth_token = Auth.encode token_payload_for(user)
-      render_ok_json(response: { user: user, token: auth_token })
+      render json: { user: user, token: auth_token }
     else
       render_error_json(errors: ["Can't find user with this pincode"])
     end
@@ -25,8 +25,7 @@ class Api::SessionsController < ApiController
   def token_payload_for(user)
     {
       user:  user.id,
-      admin: user.admin, # implementation of role
-      # iss:   ENV['ISSUER'],
+      admin: user.admin,
       iss:   'Realtime Chat',
       exp:   Time.now.to_i + 4 * 3600
     }

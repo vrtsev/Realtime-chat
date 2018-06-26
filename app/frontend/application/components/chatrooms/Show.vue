@@ -1,44 +1,73 @@
 <template>
   <div>
-    <h1>Chatroom: {{ chatroom.data.name }} </h1>
+    <h1>Chatroom: {{ chatroom.name }} </h1>
     <br>
 
-    <form class="new-message">
+    <div v-if="messagesError" class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Something went wrong!</h4>
+
+      <p v-for="(error, index) in messagesError" :key="index">
+        {{ error }}
+      </p>
+    </div>
+
+    <form @submit.prevent="createMessage(newMessage)" class="new-message">
       <div class="form-group">
-        <input v-model="message.form.content" type="text" class="form-control" placeholder="Enter your message">
+        <input v-model="newMessage.content" type="text" class="form-control" placeholder="Enter your message">
       </div>
-      <a @click="sendMessage" class="btn btn-primary">Send</a>
+
+      <button class="btn btn-primary" type="submit">Send</button>
     </form>
 
-    <br>
     <h2>Messages: </h2>
     <br>
 
-    <div v-for="(message, index) in message.allMessages" :key="index" class="alert" :class="defineMessageClass(message.type, message.user.name)" role="alert">
+    <div v-for="message in allMessages" :key="message.id" class="alert" :class="defineMessageClass(message.type, message.user.name)" role="alert">
       <b>{{ message.user.name }}:</b> {{ message.content }}
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState }    from 'vuex'
+import { mapActions }  from 'vuex'
 import ChatroomChannel from 'application/channels/chatroom_channel.js'
 
 export default {
-  computed: mapState(['chatroom', 'message']),
   mounted() {
-    store.dispatch('chatroom/show', router.currentRoute.params.id)
-    store.dispatch('message/index', router.currentRoute.params.id)
+    this.getChatroom(router.currentRoute.params.id)
+    this.getAllMessages({ chatroom_id: router.currentRoute.params.id })
     ChatroomChannel(router.currentRoute.params.id)
   },
+  data() {
+    return {
+      newMessage: {
+        content: '',
+        chatroom_id: router.currentRoute.params.id
+      }
+    }
+  },
+  computed: {
+    ...mapState('chatrooms', {
+      chatroom:       state => state.current,
+      chatroomsError: state => state.error
+    }),
+    ...mapState('messages', {
+      allMessages:    state => state.all,
+      messagesError:  state => state.error
+    })
+  },
   methods: {
-    sendMessage() {
-      store.dispatch('message/create', router.currentRoute.params.id)
-    },
+    ...mapActions('chatrooms', { getChatroom: 'get' }),
+    ...mapActions('messages',  {
+      getAllMessages: 'getAll',
+      createMessage:  'create',
+    }),
+
     defineMessageClass(type, name) {
       if (type == 'notification') return "notification"
 
-      return store.state.user.data.name == name ? 'alert-primary my-message' : 'alert-warning'
+      return store.state.sessions.current.user.name == name ? 'alert-primary my-message' : 'alert-warning'
     }
   }
 }

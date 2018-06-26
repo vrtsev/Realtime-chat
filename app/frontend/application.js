@@ -15,7 +15,7 @@
 import Vue                 from 'vue/dist/vue.js'
 import Vuex                from 'vuex'
 import VueRouter           from 'vue-router'
-import routes              from 'application/routes'
+import routes              from 'application/routes.js'
 import Store               from 'application/store'
 import axios               from "axios";
 
@@ -30,6 +30,7 @@ Vue.config.productionTip = false
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['X-CSRF-Token']     = document.querySelector('[name="csrf-token"]').content;
 axios.defaults.headers.common['Accept']           = 'application/json'
+axios.defaults.baseURL                            = '/api'
 
 // Initialize Vue instance here
 document.addEventListener('DOMContentLoaded', () => {

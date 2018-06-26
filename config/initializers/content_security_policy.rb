@@ -9,6 +9,7 @@ Rails.application.config.content_security_policy do |p|
   p.object_src  :none
   p.script_src  :self, :https, :unsafe_eval, :unsafe_inline
   p.style_src   :self, :https, :unsafe_inline
+  p.connect_src :self, :https, ENV['WEB_SOCKET_URL'], 'http://localhost:3035', 'ws://localhost:3035'
 
   # Specify URI for violation reports
   # p.report_uri "/csp-violation-report-endpoint"
