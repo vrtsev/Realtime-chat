@@ -5,7 +5,7 @@ class Api::MessagesController < ApiController
     chatroom = Chatroom.find(params[:chatroom_id])
     messages = chatroom.messages.all.order(id: :desc).limit(10) if chatroom.present?
 
-    render_ok_json(response: { messages: messages.as_json(include: :user) })
+    render json: messages.as_json(include: :user)
   end
 
   def create
@@ -15,9 +15,9 @@ class Api::MessagesController < ApiController
 
     if message.save
       ActionCable.server.broadcast("chatroom_#{params[:chatroom_id]}", message.as_json(include: :user))
-      render_ok_json(response: { message: message.as_json(include: :user) })
+      render json: message.as_json(include: :user)
     else
-      render_error_json(errors: ["Some error"])
+      render json: message.errors.full_messages, status: 422
     end
   end
 
