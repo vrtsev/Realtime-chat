@@ -3,7 +3,7 @@
     <h1>All chatrooms</h1>
 
     <div class="row">
-      <div v-for="chatroom in chatroom.allChatrooms" :key="chatroom.name" class="col-md">
+      <div v-for="chatroom in allChatrooms" :key="chatroom.name" class="col-md">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h5 class="card-title">{{ chatroom.name }}</h5>
@@ -16,12 +16,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState }   from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
-  computed: mapState(['chatroom']),
-  mounted() {
-    store.dispatch('chatroom/index')
-  }
+  mounted() { this.getAllChatrooms() },
+  computed: mapState('chatrooms', {
+    allChatrooms: state => state.all,
+    chatroom:     state => state.current,
+    error:        state => state.error
+  }),
+  methods: mapActions('chatrooms', { 
+    getAllChatrooms: 'getAll'
+  })
 }
 </script>

@@ -1,16 +1,24 @@
-// You can access each module in console by typing 'store.state.example'
-import moduleUser     from 'application/store/user.js'
-import moduleAuth     from 'application/store/auth.js'
-import moduleChatroom from 'application/store/chatroom.js'
-import moduleMessage  from 'application/store/message.js'
+// Plugins
+import VuexMount      from 'lib/vuex-bind.js'
 
-const store = {
+// You can access each module in console by typing 'store.state.example'
+import moduleSessions from 'application/store/sessions.js'
+import moduleMessages from 'application/store/messages.js'
+
+// Serializers
+import MessageSerializer from 'application/serializers/message_serializer.js'
+
+export default {
+  plugins: [
+    VuexMount('chatrooms'),
+    VuexMount('messages', MessageSerializer),
+    VuexMount('sessions')
+  ],
   modules: {
-    auth:     moduleAuth,
-    user:     moduleUser,
-    chatroom: moduleChatroom,
-    message:  moduleMessage,
+    sessions: moduleSessions,
+    // auth:     moduleAuth,
+    // user:     moduleUser,
+    // chatroom: moduleChatroom,
+    // messages:  moduleMessages,
   }
 }
-
-export default store

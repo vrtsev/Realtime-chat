@@ -7,14 +7,18 @@
 </template>
 
 <script>
-import Navbar from 'application/components/shared/Navbar.vue'
-import axios from 'axios'
+import { mapActions } from 'vuex'
+import Navbar         from 'application/components/shared/Navbar.vue'
+import AuthHelper     from 'application/helpers/auth_helper.js'
 
 export default {
   components: { navbar: Navbar },
   mounted() {
-    store.dispatch('auth/getCurrent')
-  }
+    // Auto authenticate on script initialize
+    AuthHelper.restoreToken()
+    this.getCurrent()
+  },
+  methods: mapActions('sessions', ['getCurrent']),
 }
 </script>
 

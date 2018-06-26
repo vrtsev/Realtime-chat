@@ -18,16 +18,17 @@ export default function ChatroomChannel(chatroom_id) {
         this.notification('has connected to channel')
       }, 
       disconnected(arg) { this.notification('has been disconeted') }, 
-      received(data)    { store.commit('message/addMessage', data) }, 
+      received(data)    { store.commit('messages/CREATE', { item: data }) }, 
       rejected(data)    { console.log('rejected') },
 
       // 'private'
 
       notification(text) {
         let notification = {
+          id: Math.floor(Math.random() * 5000) + 900,
           type:    'notification',
           content: text,
-          user: { name: store.state.user.data.name }
+          user: { name: store.state.sessions.current.user.name }
         }
 
         this.send(notification)
