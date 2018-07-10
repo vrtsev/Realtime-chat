@@ -71,7 +71,7 @@ export default function VuexRailsPlugin(resource, serializer) {
       if (state.all.find(i => i.id === item.id) !== undefined) {
         updateItem(item, state.all)
       } else {
-        state.all.push(item)
+        state.all.unshift(item)
       }
     },
     [UPDATE] (state, { item }) {
