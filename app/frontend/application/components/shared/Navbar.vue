@@ -30,6 +30,7 @@ export default {
   }),
   methods: {
     destroySession() {
+      router.replace('/')
       store.commit('sessions/DESTROY', this.session)
       AuthHelper.clearToken()
     }

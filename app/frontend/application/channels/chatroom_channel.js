@@ -17,7 +17,7 @@ export default function ChatroomChannel(chatroom_id) {
 
         this.notification('has connected to channel')
       }, 
-      disconnected(arg) { this.notification('has been disconeted') }, 
+      disconnected(arg) { console.log('You have been disconnected') }, 
       received(data)    { store.commit('messages/CREATE', { item: data }) }, 
       rejected(data)    { console.log('rejected') },
 

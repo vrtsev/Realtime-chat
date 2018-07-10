@@ -32,7 +32,7 @@ export default {
   }),
   methods: {
     ...mapActions('sessions', {
-      getSession:    'get',
+      getSession:    'getCurrent',
       createSession: 'create'
     }),
 
@@ -41,6 +41,7 @@ export default {
       .then(createdSession => {
         AuthHelper.saveToken(createdSession.data.token)
         this.getSession()
+        router.replace('/')
       })
       .catch(err => {
         AuthHelper.clearToken()
